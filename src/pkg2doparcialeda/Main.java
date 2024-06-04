@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        ArbolBinario sendero = new ArbolBinario(15);//4 niveles
+        ArbolBinario jardin = new ArbolBinario(50);
         Scanner leer = new Scanner(System.in);
-
+        String regex = "^\\d+$";
         boolean salir = false;
 
         while (!salir) {
@@ -24,19 +24,22 @@ public class Main {
                 case 1 -> {
                     String seguir = "s";
                     while (!seguir.equals("n")) {
-                        System.out.println("Ingresa el número que identifique la nuez:");
-                        int num = leer.nextInt();
-                        System.out.println("Ingresa el nombre");
-                        String nuez = leer.next();
-                        Nuez n = new Nuez(num, nuez);
-                        sendero.crearSendero(n);
-                        System.out.println("¿Desea ingresar otra nuez? s/n");
+//                        System.out.println("Dele un nombre del sendero");
+                        String sendero = "nuez";//leer.next();
+                        System.out.println("Dele el número a la nuez:");
+                        String num = leer.next();
+                        if(!num.matches(regex)){//por si ingresan una letra
+                            System.out.println("Dato inválido");
+                            continue;
+                        }
+                        Nodo n = new Nodo(Integer.parseInt(num), sendero);
+                        jardin.crearSendero(n);
+                        System.out.println("¿Desea agregar otro sendero? s/n");
                         seguir = leer.next();
-                        System.out.println("elegiste: " + seguir);
                     }
                 }
                 case 2 -> {
-                    if (sendero.colocarNuezAleatoria()) {
+                    if (jardin.colocarNuezAleatoria()) {
                         System.out.println("Nuez dorada colocada en uno de los extremos.");
                     } else {
                         System.out.println("Sendero vacio,debe crearlo primero");
@@ -44,15 +47,15 @@ public class Main {
 
                 }
                 case 3 -> {
-                    if (sendero.buscarNuez()) {
+                    if (jardin.buscarNuez()) {
                         System.out.println("Felicidades encontraste la nuez dorada");
                     } else {
-                        System.out.println("No se encontró la nuez.");
+                        System.out.println("Fin del sendero. No se encontró la nuez.");
                     }
                 }
                 case 4 -> {
                     System.out.println("Solucion");
-                    sendero.mostrar();
+                    jardin.mostrar();
                 }
                 case 5 -> {
                     salir = true;

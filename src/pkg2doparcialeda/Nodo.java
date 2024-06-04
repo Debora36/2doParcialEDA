@@ -1,16 +1,16 @@
 package pkg2doparcialeda;
 
-public class Nuez {
+public class Nodo {
 
     int num;
     String nuez;
 
-    public Nuez() {
+    public Nodo() {
         this.num = -1;
         this.nuez = "";
     }
 
-    public Nuez(int num, String nuez) {
+    public Nodo(int num, String nuez) {
         this.num = num;
         this.nuez = nuez;
     }

@@ -5,20 +5,25 @@ import java.util.Scanner;
 
 public class ArbolBinario {
 
-    Nuez[] arbol;
+    Nodo[] arbol;
     int tamaño;
+    int max =0;
 
     public ArbolBinario(int tamaño) {
         this.tamaño = tamaño;
-        arbol = new Nuez[tamaño];
-        Nuez n = new Nuez();
+        arbol = new Nodo[tamaño];
+        Nodo n = new Nodo();
         for (int i = 0; i <= tamaño - 1; i++) {
             arbol[i] = n;
         }
     }
 
-    public void crearSendero(Nuez n) {
+    public void crearSendero(Nodo n) {
         int i = 0;
+        if(n.getNum()>max){
+            max=n.getNum();
+        }
+        
         if (arbol[0].getNum() == -1) {
             arbol[0] = n;
         } else {
@@ -37,14 +42,15 @@ public class ArbolBinario {
 
     public void mostrar() {
         for (int i = 0; i < tamaño - 1; i++) {
-            System.out.println(arbol[i] + " - ");
+            System.out.print(arbol[i] + " - ");
         }
+        System.out.println("");
     }
 
     public boolean colocarNuezAleatoria() {
         Random random = new Random();
-        int posicion = random.nextInt(2 * tamaño);
-        Nuez nuezDorada = new Nuez(posicion, "NUEZ DORADA");
+        int posicion = random.nextInt(2 * max);
+        Nodo nuezDorada = new Nodo(posicion, "NUEZ DORADA");
         if (arbol[0].getNum() == -1) {
             return false;
         } else {
