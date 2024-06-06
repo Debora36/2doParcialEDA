@@ -17,7 +17,7 @@ public class Main {
             System.out.println("3. Buscar nuez dorada");
             System.out.println("4. Mostrar sendero");
             System.out.println("5. Salir");
-            System.out.print("Elige una opción: ");
+            System.out.print("Elige una opcion: ");
             int opcion = leer.nextInt();
 
             switch (opcion) {
@@ -26,10 +26,10 @@ public class Main {
                     while (!seguir.equals("n")) {
 //                        System.out.println("Dele un nombre del sendero");
                         String sendero = "nuez";//leer.next();
-                        System.out.println("Dele el número a la nuez:");
+                        System.out.println("Dele el numero a la nuez:");
                         String num = leer.next();
                         if(!num.matches(regex)){//por si ingresan una letra
-                            System.out.println("Dato inválido");
+                            System.out.println("Dato invalido");
                             continue;
                         }
                         Nodo n = new Nodo(Integer.parseInt(num), sendero);
@@ -50,7 +50,7 @@ public class Main {
                     if (jardin.buscarNuez()) {
                         System.out.println("Felicidades encontraste la nuez dorada");
                     } else {
-                        System.out.println("Fin del sendero. No se encontró la nuez.");
+                        System.out.println("Fin del sendero. No se encontro la nuez.");
                     }
                 }
                 case 4 -> {
@@ -62,7 +62,7 @@ public class Main {
                     System.out.println("Saliendo");
                 }
                 default ->
-                    System.out.println("Opción no válida. Intente de nuevo.");
+                    System.out.println("Opcion no valida. Intente de nuevo.");
             }
         }
     }

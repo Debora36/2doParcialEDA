@@ -42,7 +42,12 @@ public class ArbolBinario {
 
     public void mostrar() {
         for (int i = 0; i < tamaño - 1; i++) {
-            System.out.print(arbol[i] + " - ");
+            if(arbol[i].getNum()== -1){
+                System.out.print(" * ");
+            }else{
+                System.out.print(arbol[i]); 
+            }
+           
         }
         System.out.println("");
     }
