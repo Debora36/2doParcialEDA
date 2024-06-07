@@ -8,11 +8,13 @@ public class ArbolBinario {
     Nodo[] arbol;
     int tamaño;
     int max =0;
+    Nodo nuezDorada;
 
     public ArbolBinario(int tamaño) {
         this.tamaño = tamaño;
         arbol = new Nodo[tamaño];
         Nodo n = new Nodo();
+        nuezDorada = new Nodo();
         for (int i = 0; i <= tamaño - 1; i++) {
             arbol[i] = n;
         }
@@ -43,7 +45,7 @@ public class ArbolBinario {
     public void mostrar() {
         for (int i = 0; i < tamaño - 1; i++) {
             if(arbol[i].getNum()== -1){
-                System.out.print(" * ");
+                System.out.print(" () ");
             }else{
                 System.out.print(arbol[i]); 
             }
@@ -55,7 +57,7 @@ public class ArbolBinario {
     public boolean colocarNuezAleatoria() {
         Random random = new Random();
         int posicion = random.nextInt(2 * max);
-        Nodo nuezDorada = new Nodo(posicion, "NUEZ DORADA");
+        nuezDorada = new Nodo(posicion, "NUEZ DORADA");
         if (arbol[0].getNum() == -1) {
             return false;
         } else {
@@ -69,7 +71,7 @@ public class ArbolBinario {
         int contador = 0;
         Scanner leer = new Scanner(System.in);
         while ((arbol[i].getNum() != -1) && (i < tamaño)) {
-            System.out.println("¿Desea ir hacia la derecha ó a la izquierda? I/D");
+            System.out.println("Desea ir hacia la derecha o a la izquierda? I/D");
             String direccion = leer.next();
             direccion = direccion.toUpperCase();
             if ("I".equals(direccion)) {
@@ -94,6 +96,22 @@ public class ArbolBinario {
         }
         System.out.println("Realizaste " + contador + " pasos");
         return false;
+    }
+    
+    public int buscarNuezDorada() {
+        int pasos = 0;
+        int i = 0;
+
+        while (arbol[i].getNum() != nuezDorada.getNum() && nuezDorada.getNum()!= -1) {
+            pasos++;
+            if (nuezDorada.getNum() < arbol[i].getNum()) {
+                i = 2 * i + 1;
+            } else {
+                i = 2 * i + 2;
+            }
+        }
+
+        return pasos;
     }
 
 }

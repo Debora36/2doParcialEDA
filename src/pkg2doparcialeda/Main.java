@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        ArbolBinario jardin = new ArbolBinario(50);
+        ArbolBinario jardin = new ArbolBinario(30);
         Scanner leer = new Scanner(System.in);
-        String regex = "^\\d+$";
+        String regex = "^\\d+$";//es para validar que sole ingresen numeros de parte del usuario
         boolean salir = false;
 
         while (!salir) {
@@ -15,8 +15,9 @@ public class Main {
             System.out.println("1. Crear sendero");
             System.out.println("2. Colocar nuez dorada");
             System.out.println("3. Buscar nuez dorada");
-            System.out.println("4. Mostrar sendero");
-            System.out.println("5. Salir");
+            System.out.println("4. Mostrar Jardin");
+            System.out.println("5. Busqueda Automatica");
+            System.out.println("6. Salir");
             System.out.print("Elige una opcion: ");
             int opcion = leer.nextInt();
 
@@ -24,25 +25,29 @@ public class Main {
                 case 1 -> {
                     String seguir = "s";
                     while (!seguir.equals("n")) {
-//                        System.out.println("Dele un nombre del sendero");
-                        String sendero = "nuez";//leer.next();
-                        System.out.println("Dele el numero a la nuez:");
+                        String sendero = "Sendero";//leer.next();
+                        System.out.println("Dele un numero a la nuez:");
                         String num = leer.next();
-                        if(!num.matches(regex)){//por si ingresan una letra
+                        if (!num.matches(regex)) {//por si ingresan una letra
                             System.out.println("Dato invalido");
                             continue;
                         }
                         Nodo n = new Nodo(Integer.parseInt(num), sendero);
                         jardin.crearSendero(n);
-                        System.out.println("¿Desea agregar otro sendero? s/n");
+                        System.out.println("Desea agregar otra nuez? s/n");
                         seguir = leer.next();
+                        while (!seguir.matches("[sSnN]")) {
+                            System.out.println("Entrada no valida. Por favor, ingrese 's' para si o 'n' para no: ");
+                            seguir = leer.next();
+                        }
                     }
                 }
                 case 2 -> {
-                    if (jardin.colocarNuezAleatoria()) {
+                    try{
+                        jardin.colocarNuezAleatoria();
                         System.out.println("Nuez dorada colocada en uno de los extremos.");
-                    } else {
-                        System.out.println("Sendero vacio,debe crearlo primero");
+                    }catch(Exception e){
+                         System.out.println("Sendero vacio,debe crearlo primero");
                     }
 
                 }
@@ -54,10 +59,14 @@ public class Main {
                     }
                 }
                 case 4 -> {
-                    System.out.println("Solucion");
+                    System.out.println("Mapa del Jardin");
                     jardin.mostrar();
                 }
                 case 5 -> {
+                    int pasos = jardin.buscarNuezDorada();
+                    System.out.println("Pasos realizados al encontrar la Nuez Dorada: " + pasos);
+                }
+                case 6 -> {
                     salir = true;
                     System.out.println("Saliendo");
                 }
